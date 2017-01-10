@@ -14,7 +14,7 @@ namespace Incubators.Models.Repositories
         public int Id { get; set; }
         [ForeignKey("Incubator")]
         public int IncubatorId { get; set; }
-        public DateTime MeasuredOn { get; set; }
+        public DateTime? MeasuredOn { get; set; }
         [ForeignKey("Period")]
         public int IncubatorPeriodId { get; set; }
         public double Temperature { get; set; }

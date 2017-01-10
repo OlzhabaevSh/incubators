@@ -14,8 +14,8 @@ namespace Incubators.Models.Repositories
         public int Id { get; set; }
         public string Title { get; set; }
         public string Type { get; set; }
-        public DateTime StartedOn { get; set; } 
-        public DateTime FinishingOn { get; set; }
+        public DateTime? StartedOn { get; set; } 
+        public DateTime? FinishingOn { get; set; }
         
         [ForeignKey("Company")]
         public int? CompanyId { get; set; }
