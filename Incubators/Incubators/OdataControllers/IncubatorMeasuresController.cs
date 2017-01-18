@@ -85,7 +85,7 @@ namespace Incubators.OdataControllers
         }
 
         // POST: odata/IncubatorMeasures
-        public async Task<IHttpActionResult> Post(IncubatorMeasure incubatorMeasure)
+        public IHttpActionResult Post(IncubatorMeasure incubatorMeasure)
         {
             if (!ModelState.IsValid)
             {
@@ -101,27 +101,23 @@ namespace Incubators.OdataControllers
                 return NotFound();
             }
 
-            await db.Incubators
-                .Where(i => i.Id == incubatorMeasure.IncubatorId)
-                .Select(i => i.Periods.ToList()).ForEachAsync((ps) => {
-                    periods.AddRange(periods);
-                });
+            periods = incubator.Periods.OrderBy(p => p.Order).ToList();
             if (periods.Count == 0)
             {
-                return BadRequest();
+                return BadRequest("No periods found");
             }
-            periods.OrderBy(p => p.Order);
 
             var date = incubator.StartedOn;
             if (!date.HasValue)
             {
-                return BadRequest();
+                return BadRequest("No start date on incubator");
             }
             
             var index = 0;
             while (date < DateTime.Now && index < periods.Count)
             {
-                date.Value.AddMinutes(periods[index].Timespan);
+                date = date.Value.AddMinutes(periods[index].Timespan);
+                index++;
             }
             var incubatorPeriodId = periods[index].Id;
 
