@@ -275,9 +275,9 @@
     <Compile Include="Migrations\201701151833064_added_eggs_to_incubators.Designer.cs">
       <DependentUpon>201701151833064_added_eggs_to_incubators.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701152039535_added_last_measure.cs" />
-    <Compile Include="Migrations\201701152039535_added_last_measure.Designer.cs">
-      <DependentUpon>201701152039535_added_last_measure.cs</DependentUpon>
+    <Compile Include="Migrations\201701180823362_added-events.cs" />
+    <Compile Include="Migrations\201701180823362_added-events.Designer.cs">
+      <DependentUpon>201701180823362_added-events.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -285,10 +285,12 @@
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Repositories\Company.cs" />
+    <Compile Include="Models\Repositories\Event.cs" />
     <Compile Include="Models\Repositories\Incubator.cs" />
     <Compile Include="Models\Repositories\IncubatorMeasure.cs" />
     <Compile Include="Models\Repositories\IncubatorPeriod.cs" />
     <Compile Include="OdataControllers\CompaniesController.cs" />
+    <Compile Include="OdataControllers\EventsController.cs" />
     <Compile Include="OdataControllers\IncubatorMeasuresController.cs" />
     <Compile Include="OdataControllers\IncubatorPeriodsController.cs" />
     <Compile Include="OdataControllers\IncubatorsController.cs" />
@@ -381,8 +383,8 @@
     <EmbeddedResource Include="Migrations\201701151833064_added_eggs_to_incubators.resx">
       <DependentUpon>201701151833064_added_eggs_to_incubators.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701152039535_added_last_measure.resx">
-      <DependentUpon>201701152039535_added_last_measure.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701180823362_added-events.resx">
+      <DependentUpon>201701180823362_added-events.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -27,5 +27,6 @@ namespace Incubators.Models.Repositories
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<IncubatorMeasure> Mesures { get; set; }
         public virtual ICollection<IncubatorPeriod> Periods { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

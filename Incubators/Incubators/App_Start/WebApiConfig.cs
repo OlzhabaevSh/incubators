@@ -39,6 +39,7 @@ namespace Incubators
             builder.EntitySet<Incubator>("Incubators");
             builder.EntitySet<IncubatorMeasure>("IncubatorMeasures");
             builder.EntitySet<Company>("Companies");
+            builder.EntitySet<Event>("Events");
             config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
         }

@@ -14,5 +14,6 @@ namespace Incubators.Models
 
         public virtual DbSet<IncubatorPeriod> IncubatorPeriods { get; set; }
         public virtual DbSet<IncubatorMeasure> IncubatorMeasures { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
     }
 }

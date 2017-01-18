@@ -13,6 +13,7 @@ using System.Web.OData.Query;
 using System.Web.OData.Routing;
 using Incubators.Models;
 using Incubators.Models.Repositories;
+using System.Threading.Tasks;
 
 namespace Incubators.OdataControllers
 {
@@ -84,7 +85,7 @@ namespace Incubators.OdataControllers
         }
 
         // POST: odata/IncubatorMeasures
-        public IHttpActionResult Post(IncubatorMeasure incubatorMeasure)
+        public async Task<IHttpActionResult> Post(IncubatorMeasure incubatorMeasure)
         {
             if (!ModelState.IsValid)
             {
@@ -92,6 +93,40 @@ namespace Incubators.OdataControllers
             }
 
             incubatorMeasure.MeasuredOn = DateTime.Now;
+
+            List<IncubatorPeriod> periods = new List<IncubatorPeriod>();
+            var incubator = db.Incubators.Where(i => i.Id == incubatorMeasure.IncubatorId).FirstOrDefault();
+
+            if (incubator == null) {
+                return NotFound();
+            }
+
+            await db.Incubators
+                .Where(i => i.Id == incubatorMeasure.IncubatorId)
+                .Select(i => i.Periods.ToList()).ForEachAsync((ps) => {
+                    periods.AddRange(periods);
+                });
+            if (periods.Count == 0)
+            {
+                return BadRequest();
+            }
+            periods.OrderBy(p => p.Order);
+
+            var date = incubator.StartedOn;
+            if (!date.HasValue)
+            {
+                return BadRequest();
+            }
+            
+            var index = 0;
+            while (date < DateTime.Now && index < periods.Count)
+            {
+                date.Value.AddMinutes(periods[index].Timespan);
+            }
+            var incubatorPeriodId = periods[index].Id;
+
+            incubatorMeasure.IncubatorPeriodId = incubatorPeriodId;
+
             db.IncubatorMeasures.Add(incubatorMeasure);
             db.SaveChanges();
 

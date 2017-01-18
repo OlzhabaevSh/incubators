@@ -25,6 +25,7 @@ namespace Incubators.OdataControllers
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<Incubator>("Incubators");
     builder.EntitySet<Company>("Companies"); 
+    builder.EntitySet<Event>("Events"); 
     builder.EntitySet<IncubatorMeasure>("IncubatorMeasures"); 
     builder.EntitySet<IncubatorPeriod>("IncubatorPeriods"); 
     builder.EntitySet<ApplicationUser>("ApplicationUsers"); 
@@ -157,6 +158,13 @@ namespace Incubators.OdataControllers
         public SingleResult<Company> GetCompany([FromODataUri] int key)
         {
             return SingleResult.Create(db.Incubators.Where(m => m.Id == key).Select(m => m.Company));
+        }
+
+        // GET: odata/Incubators(5)/Events
+        [EnableQuery]
+        public IQueryable<Event> GetEvents([FromODataUri] int key)
+        {
+            return db.Incubators.Where(m => m.Id == key).SelectMany(m => m.Events);
         }
 
         // GET: odata/Incubators(5)/Mesures
