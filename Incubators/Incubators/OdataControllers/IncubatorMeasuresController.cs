@@ -91,6 +91,7 @@ namespace Incubators.OdataControllers
                 return BadRequest(ModelState);
             }
 
+            incubatorMeasure.MeasuredOn = DateTime.Now;
             db.IncubatorMeasures.Add(incubatorMeasure);
             db.SaveChanges();
 

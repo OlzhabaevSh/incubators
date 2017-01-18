@@ -16,6 +16,7 @@ namespace Incubators.Models.Repositories
         public string Type { get; set; }
         public DateTime? StartedOn { get; set; } 
         public DateTime? FinishingOn { get; set; }
+        public int Eggs { get; set; }
         
         [ForeignKey("Company")]
         public int? CompanyId { get; set; }
@@ -24,7 +25,6 @@ namespace Incubators.Models.Repositories
         [ForeignKey("User")]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
-
         public virtual ICollection<IncubatorMeasure> Mesures { get; set; }
         public virtual ICollection<IncubatorPeriod> Periods { get; set; }
     }

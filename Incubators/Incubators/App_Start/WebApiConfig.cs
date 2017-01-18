@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 using System.Web.OData.Builder;
 using System.Web.OData.Extensions;
 using Incubators.Models.Repositories;
+using System.Web.Http.Cors;
 
 namespace Incubators
 {
@@ -19,6 +20,10 @@ namespace Incubators
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
